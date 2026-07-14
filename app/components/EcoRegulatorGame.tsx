@@ -52,6 +52,7 @@ export default function EcoRegulatorGame() {
   const [isGameOverDueToLoss, setIsGameOverDueToLoss] = useState(false);
   const [completedTurns, setCompletedTurns] = useState(0);
   const [knowledgePanelOpen, setKnowledgePanelOpen] = useState(false);
+  const [activeKnowledgeTag, setActiveKnowledgeTag] = useState<string | null>(null);
   const [decisionLog, setDecisionLog] = useState<DecisionLogEntry[]>([]);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
 
@@ -160,7 +161,10 @@ export default function EcoRegulatorGame() {
                 <span className="text-xs font-bold text-white font-mono">{Math.min(currentTurn + 1, totalScenarios)}/{totalScenarios}</span>
               </div>
               <button
-                onClick={() => setKnowledgePanelOpen(true)}
+                onClick={() => {
+                  setActiveKnowledgeTag(null);
+                  setKnowledgePanelOpen(true);
+                }}
                 id="btn-knowledge-panel"
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300 hover:bg-blue-500/20 hover:border-blue-400/30 transition-all cursor-pointer text-xs font-semibold"
                 aria-label="Mở bảng kiến thức"
@@ -205,7 +209,11 @@ export default function EcoRegulatorGame() {
               scenario={currentScenario} 
               onChoice={handleChoice} 
               disabled={phase === "feedback"}
-              selectedIndex={selectedChoiceIndex} 
+              selectedIndex={selectedChoiceIndex}
+              onOpenTheory={(tag) => {
+                setActiveKnowledgeTag(tag);
+                setKnowledgePanelOpen(true);
+              }}
             />
           )}
         </AnimatePresence>
@@ -243,7 +251,14 @@ export default function EcoRegulatorGame() {
         )}
       </AnimatePresence>
 
-      <KnowledgePanel isOpen={knowledgePanelOpen} onClose={() => setKnowledgePanelOpen(false)} />
+      <KnowledgePanel 
+        isOpen={knowledgePanelOpen} 
+        onClose={() => {
+          setKnowledgePanelOpen(false);
+          setActiveKnowledgeTag(null);
+        }} 
+        autoOpenTag={activeKnowledgeTag}
+      />
     </div>
   );
 }

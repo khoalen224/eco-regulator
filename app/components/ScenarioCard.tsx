@@ -9,6 +9,7 @@ interface ScenarioCardProps {
   onChoice: (index: number) => void;
   disabled: boolean;
   selectedIndex?: number | null;
+  onOpenTheory?: (tag: string) => void;
 }
 
 const choiceVariants: Variants = {
@@ -25,6 +26,7 @@ export default function ScenarioCard({
   onChoice,
   disabled,
   selectedIndex,
+  onOpenTheory,
 }: ScenarioCardProps) {
   return (
     <motion.div
@@ -58,9 +60,19 @@ export default function ScenarioCard({
               </span>
             </motion.div>
             {scenario.tag && (
-              <span className="px-2 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-mono text-violet-300">
-                {scenario.tag}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-mono text-violet-300">
+                  {scenario.tag}
+                </span>
+                {onOpenTheory && (
+                  <button
+                    onClick={() => onOpenTheory(scenario.tag)}
+                    className="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-[10px] font-semibold text-slate-300 hover:text-white hover:border-slate-500 transition-colors cursor-pointer flex items-center gap-1"
+                  >
+                    Xem lý thuyết
+                  </button>
+                )}
+              </div>
             )}
           </div>
 

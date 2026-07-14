@@ -8,7 +8,11 @@ import {
   X,
   GraduationCap,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useReadProgress } from "../hooks/useReadProgress";
+import { ReadableBlock } from "./ReadableBlock";
+import { SectionProgress } from "./SectionProgress";
+import { Flashcard } from "./Flashcard";
 
 const KNOWLEDGE_SECTIONS = [
   {
@@ -79,6 +83,18 @@ const KNOWLEDGE_SECTIONS = [
         heading: "Điều tiết thị trường BĐS",
         text: "Công khai thông tin quy hoạch, áp thuế lũy tiến với BĐS thứ hai — thay vì mệnh lệnh hành chính thô bạo hay để thị trường tự phát hoàn toàn.",
       },
+      {
+        heading: "Vì sao cần tiếp tục hoàn thiện?",
+        text: "Hệ thống pháp luật, cơ chế chính sách còn thiếu đồng bộ; các thị trường yếu tố sản xuất (đất đai, vốn, lao động, khoa học – công nghệ) phát triển chưa đầy đủ, chưa hiện đại; hiệu lực quản lý nhà nước và kỷ luật thị trường còn hạn chế.",
+      },
+      {
+        heading: "Ví dụ: Cổ phần hóa doanh nghiệp nhà nước",
+        text: "Một doanh nghiệp nhà nước thua lỗ, công nghệ lạc hậu được cổ phần hóa cho nhà đầu tư tư nhân, nhưng kèm điều kiện giữ việc làm tối thiểu 2 năm và cam kết đổi mới công nghệ — vừa để thị trường quyết định hiệu quả, vừa bảo vệ người lao động cũ, đúng tinh thần hoàn thiện thể chế sở hữu.",
+      },
+      {
+        heading: "Ví dụ: Hội nhập qua CPTPP, EVFTA",
+        text: "Việt Nam cam kết giảm thuế quan gần về 0% với nhiều mặt hàng khi ký CPTPP, EVFTA, nhưng đàm phán lộ trình mở cửa theo từng ngành (5–10 năm) cho các lĩnh vực nhạy cảm như ô tô, sữa — hội nhập có chuẩn bị thay vì mở toang ngay lập tức.",
+      },
     ],
   },
   {
@@ -104,17 +120,135 @@ const KNOWLEDGE_SECTIONS = [
         heading: "Hài hòa lợi ích",
         text: "Thống nhất biện chứng giữa lợi ích các chủ thể: mặt mâu thuẫn được hạn chế, mặt thống nhất được khuyến khích.",
       },
+      {
+        heading: "Nhân tố ảnh hưởng đến quan hệ lợi ích",
+        text: "Trình độ phát triển của lực lượng sản xuất; địa vị của chủ thể trong quan hệ sở hữu tư liệu sản xuất; chính sách phân phối thu nhập của Nhà nước; mức độ hội nhập kinh tế quốc tế.",
+      },
+      {
+        heading: "Ví dụ: Đình công đòi tăng lương",
+        text: "Công nhân một khu công nghiệp đình công đòi tăng lương khi giá sinh hoạt tăng mạnh — đây là biểu hiện trực tiếp của quan hệ lợi ích giữa người lao động và người sử dụng lao động, nơi lợi ích hai bên vừa thống nhất (cùng cần doanh nghiệp tồn tại) vừa mâu thuẫn (phân chia phần giá trị tạo ra).",
+      },
+      {
+        heading: "Ví dụ: Thuế thu nhập cá nhân lũy tiến",
+        text: "Người thu nhập càng cao chịu mức thuế suất càng lớn, phần thu thêm được đưa vào quỹ bảo hiểm y tế, trợ cấp thất nghiệp — đây là công cụ Nhà nước dùng để điều hòa lợi ích giữa cá nhân thu nhập cao và phần còn lại của xã hội.",
+      },
+      {
+        heading: "Ví dụ: Đối thoại ba bên giải quyết tranh chấp lao động",
+        text: "Khi xảy ra tranh chấp lương/điều kiện làm việc, Nhà nước (qua Sở Lao động), công đoàn và doanh nghiệp cùng ngồi đối thoại để tìm phương án các bên chấp nhận được, thay vì để đình công tự phát kéo dài — thể hiện vai trò giải quyết mâu thuẫn lợi ích bằng công cụ đối thoại, hòa giải.",
+      },
     ],
   },
 ];
 
+const SECTIONS_WITH_IDS = KNOWLEDGE_SECTIONS.map((s) => ({
+  ...s,
+  points: s.points.map((p, i) => ({
+    ...p,
+    id: `block-${s.id}-${i}`,
+    isExample: p.heading.toLowerCase().startsWith("ví dụ"),
+  })),
+}));
+
+function SectionWrapper({
+  section,
+  isExpanded,
+  onToggle,
+}: {
+  section: typeof SECTIONS_WITH_IDS[0];
+  isExpanded: boolean;
+  onToggle: () => void;
+}) {
+  const blockIds = section.points.map((p) => p.id);
+  const { isRead, markRead, progress } = useReadProgress(section.id, blockIds);
+
+  return (
+    <div className={`rounded-xl border ${section.borderColor} ${section.bgColor} overflow-hidden`}>
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between p-4 text-left cursor-pointer hover:bg-white/02 transition-colors"
+        id={`knowledge-section-${section.id}`}
+      >
+        <div className="flex items-center gap-2.5">
+          <BookOpen className={`w-4 h-4 ${section.color} flex-shrink-0`} />
+          <span className={`font-semibold text-sm ${section.color}`}>{section.title}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <SectionProgress {...progress} />
+          {isExpanded ? (
+            <ChevronUp className="w-4 h-4 text-slate-500" />
+          ) : (
+            <ChevronDown className="w-4 h-4 text-slate-500" />
+          )}
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 space-y-3">
+              {section.points.map((point) => (
+                <ReadableBlock
+                  key={point.id}
+                  blockId={point.id}
+                  heading={point.heading}
+                  body={point.text}
+                  isExample={point.isExample}
+                  isRead={isRead(point.id)}
+                  onRead={markRead}
+                />
+              ))}
+
+              {section.points.length > 0 && (
+                <Flashcard 
+                  frontText={section.points[0].heading} 
+                  backText={section.points[0].text} 
+                />
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 interface KnowledgePanelProps {
   isOpen: boolean;
   onClose: () => void;
+  autoOpenTag?: string | null;
 }
 
-export default function KnowledgePanel({ isOpen, onClose }: KnowledgePanelProps) {
+export default function KnowledgePanel({ isOpen, onClose, autoOpenTag }: KnowledgePanelProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>("5.1");
+
+  // Auto-expand section if autoOpenTag is provided
+  useEffect(() => {
+    if (isOpen && autoOpenTag) {
+      const sectionId = autoOpenTag.substring(0, 3); // Extract "5.1" from "5.1.2.a"
+      if (SECTIONS_WITH_IDS.some((s) => s.id === sectionId)) {
+        setExpandedSection(sectionId);
+        
+        // Wait a bit for the animation, then scroll
+        setTimeout(() => {
+          const el = document.getElementById(`knowledge-section-${sectionId}`);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Add a temporary glow class
+            el.parentElement?.classList.add("ring-2", "ring-violet-400", "ring-offset-2", "ring-offset-slate-900", "transition-all", "duration-500");
+            setTimeout(() => {
+              el.parentElement?.classList.remove("ring-2", "ring-violet-400", "ring-offset-2", "ring-offset-slate-900");
+            }, 2000);
+          }
+        }, 300);
+      }
+    }
+  }, [isOpen, autoOpenTag]);
 
   return (
     <AnimatePresence>
@@ -160,63 +294,20 @@ export default function KnowledgePanel({ isOpen, onClose }: KnowledgePanelProps)
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
-              {KNOWLEDGE_SECTIONS.map((section) => (
-                <div
+              {SECTIONS_WITH_IDS.map((section) => (
+                <SectionWrapper
                   key={section.id}
-                  className={`rounded-xl border ${section.borderColor} ${section.bgColor} overflow-hidden`}
-                >
-                  <button
-                    onClick={() =>
-                      setExpandedSection(
-                        expandedSection === section.id ? null : section.id
-                      )
-                    }
-                    className="w-full flex items-center justify-between p-4 text-left cursor-pointer hover:bg-white/02 transition-colors"
-                    id={`knowledge-section-${section.id}`}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <BookOpen className={`w-4 h-4 ${section.color} flex-shrink-0`} />
-                      <span className={`font-semibold text-sm ${section.color}`}>
-                        {section.title}
-                      </span>
-                    </div>
-                    {expandedSection === section.id ? (
-                      <ChevronUp className="w-4 h-4 text-slate-500" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 text-slate-500" />
-                    )}
-                  </button>
-
-                  <AnimatePresence>
-                    {expandedSection === section.id && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-4 pb-4 space-y-3">
-                          {section.points.map((point, i) => (
-                            <div
-                              key={i}
-                              className="pl-3 border-l-2 border-slate-600/50"
-                            >
-                              <p className="text-xs font-bold text-slate-300 mb-1">
-                                {point.heading}
-                              </p>
-                              <p className="text-xs text-slate-400 leading-relaxed">
-                                {point.text}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                  section={section}
+                  isExpanded={expandedSection === section.id}
+                  onToggle={() =>
+                    setExpandedSection(
+                      expandedSection === section.id ? null : section.id
+                    )
+                  }
+                />
               ))}
             </div>
+
 
             {/* Footer */}
             <div className="p-4 border-t border-slate-700/50 bg-slate-900/90">
