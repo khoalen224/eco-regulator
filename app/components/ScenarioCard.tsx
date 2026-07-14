@@ -43,17 +43,24 @@ export default function ScenarioCard({
 
         <div className="p-6 md:p-8">
           {/* Category badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-5"
-          >
-            <Tag className="w-3.5 h-3.5 text-blue-400" />
-            <span className="text-xs font-semibold text-blue-300 tracking-wide uppercase">
-              {scenario.category}
-            </span>
-          </motion.div>
+          <div className="flex flex-wrap items-center gap-2 mb-5">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20"
+            >
+              <Tag className="w-3.5 h-3.5 text-blue-400" />
+              <span className="text-xs font-semibold text-blue-300 tracking-wide uppercase">
+                {scenario.category}
+              </span>
+            </motion.div>
+            {scenario.tag && (
+              <span className="px-2 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-mono text-violet-300">
+                {scenario.tag}
+              </span>
+            )}
+          </div>
 
           {/* Question */}
           <div className="flex gap-3 mb-7">
