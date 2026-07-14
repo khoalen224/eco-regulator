@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { AiTutorChat } from "./components/AiTutorChat";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,7 +43,10 @@ export default function RootLayout({
       lang="vi"
       className={`${inter.variable} ${outfit.variable} h-full`}
     >
-      <body className="min-h-full bg-grid-pattern">{children}</body>
+      <body className="min-h-full bg-grid-pattern">
+        {children}
+        <AiTutorChat />
+      </body>
     </html>
   );
 }

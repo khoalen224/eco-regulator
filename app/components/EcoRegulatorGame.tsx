@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Cpu, GraduationCap, Layers, ChevronRight } from "lucide-react";
+import { Cpu, Layers, ChevronRight, GraduationCap } from "lucide-react";
 
 import { allScenarios, getShuffledScenarios, type Scenario } from "../data/scenarios";
 import StatBar from "./StatBar";
@@ -10,6 +10,7 @@ import ScenarioCard from "./ScenarioCard";
 import FeedbackModal from "./FeedbackModal";
 import GameOverScreen from "./GameOverScreen";
 import KnowledgePanel from "./KnowledgePanel";
+import TeamFooter from "./TeamFooter";
 import { computeVerdict, type DecisionLogEntry, type Verdict } from "../lib/verdict";
 
 interface GameState {
@@ -259,6 +260,9 @@ export default function EcoRegulatorGame() {
         }} 
         autoOpenTag={activeKnowledgeTag}
       />
+
+      {/* FOOTER */}
+      <TeamFooter />
     </div>
   );
 }
