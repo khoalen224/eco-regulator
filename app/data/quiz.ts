@@ -749,6 +749,64 @@ export const quizBank: QuizQuestion[] = [
     correctId: "C",
     explanation: "Cổ phần hóa bằng mọi giá liên quan đến việc sắp xếp lại thể chế sở hữu và quản lý DNNN, không trực tiếp phản ánh nội dung giải quyết công bằng xã hội (nếu làm sai còn có thể gây bất công).",
   },
+  
+  // ---------- Các câu hỏi bám sát Ví dụ thực tế vừa bổ sung ----------
+  {
+    id: "q51",
+    tag: "5.1.3",
+    type: "mcq",
+    question: "Việc Nhà nước ban hành quy định quản lý các ứng dụng gọi xe công nghệ (như Grab, Be) nhằm thu thuế và bảo vệ quyền lợi tài xế thể hiện đặc trưng nào của KTTT định hướng XHCN?",
+    options: [
+      { id: "A", text: "Đặc trưng về mục tiêu phát triển" },
+      { id: "B", text: "Đặc trưng về quan hệ quản lý kinh tế" },
+      { id: "C", text: "Đặc trưng về quan hệ sở hữu" },
+      { id: "D", text: "Đặc trưng về phân phối" },
+    ],
+    correctId: "B",
+    explanation: "Sự xuất hiện của các mô hình kinh doanh mới (Grab/Be) đòi hỏi Nhà nước phải kịp thời điều tiết bằng pháp luật, chính sách — đây chính là đặc trưng về quan hệ quản lý kinh tế của Nhà nước.",
+  },
+  {
+    id: "q52",
+    tag: "5.3.2",
+    type: "mcq",
+    question: "Hội đồng Tiền lương Quốc gia họp hàng năm để thương lượng và đề xuất mức lương tối thiểu vùng mới là biểu hiện rõ nét của cơ chế nào?",
+    options: [
+      { id: "A", text: "Cơ chế quản lý kinh tế bằng mệnh lệnh hành chính tuyệt đối" },
+      { id: "B", text: "Cơ chế giải quyết mâu thuẫn lợi ích bằng đối thoại ba bên (Nhà nước - Doanh nghiệp - Người lao động)" },
+      { id: "C", text: "Cơ chế phân phối thuần túy theo nguyên tắc thị trường tự do" },
+      { id: "D", text: "Cơ chế bảo hộ doanh nghiệp nhà nước" },
+    ],
+    correctId: "B",
+    explanation: "Hội đồng Tiền lương có đại diện của Tổng LĐLĐ, VCCI và Bộ LĐTBXH — đại diện điển hình cho việc giải quyết hài hòa lợi ích qua đối thoại 3 bên.",
+  },
+  {
+    id: "q53",
+    tag: "5.2",
+    type: "mcq",
+    question: "Khi thị trường bất động sản sốt ảo, Nhà nước công khai thông tin quy hoạch và xem xét áp dụng thuế lũy tiến đối với bất động sản thứ hai. Đây là ví dụ của việc:",
+    options: [
+      { id: "A", text: "Xóa bỏ hoàn toàn thị trường bất động sản tư nhân" },
+      { id: "B", text: "Điều tiết thị trường nhằm khắc phục các khuyết tật của thị trường tự do phát" },
+      { id: "C", text: "Chuyển toàn bộ đất đai về sở hữu tư nhân" },
+      { id: "D", text: "Kích thích đầu cơ bất động sản để tăng thu ngân sách" },
+    ],
+    correctId: "B",
+    explanation: "Dùng thuế và minh bạch thông tin thay vì dùng mệnh lệnh hành chính cấm đoán là cách điều tiết đúng đắn, phù hợp với thể chế KTTT nhằm hạn chế rủi ro bong bóng BĐS.",
+  },
+  {
+    id: "q54",
+    tag: "5.2",
+    type: "mcq",
+    question: "Khi cổ phần hóa một doanh nghiệp nhà nước thua lỗ, Nhà nước yêu cầu nhà đầu tư mới phải cam kết đổi mới công nghệ và giữ việc làm cho người lao động ít nhất 2 năm. Đây là cách làm nhằm:",
+    options: [
+      { id: "A", text: "Bán doanh nghiệp với giá cao nhất có thể" },
+      { id: "B", text: "Gắn việc giải quyết bài toán hiệu quả kinh tế với bảo đảm an sinh xã hội" },
+      { id: "C", text: "Duy trì mô hình độc quyền của Nhà nước" },
+      { id: "D", text: "Xóa bỏ hoàn toàn kinh tế nhà nước" },
+    ],
+    correctId: "B",
+    explanation: "Cam kết giữ việc làm là một điều kiện nhằm bảo vệ nhóm lao động yếu thế (tránh sa thải hàng loạt), thể hiện đúng tinh thần gắn tăng trưởng với công bằng ngay trong từng bước cải cách thể chế.",
+  },
 ];
 
 // Tiện ích: lọc câu hỏi theo mục, dùng cho chế độ "Ôn tập theo chương"
