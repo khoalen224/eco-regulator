@@ -34,6 +34,30 @@ const KNOWLEDGE_SECTIONS = [
         heading: "Quan hệ tăng trưởng – công bằng",
         text: "Gắn tăng trưởng kinh tế với tiến bộ và công bằng xã hội ngay trong từng bước, từng chính sách — không 'tăng trưởng trước, công bằng sau'.",
       },
+      {
+        heading: "Vì sao Việt Nam chọn mô hình này?",
+        text: "Ba lý do: (1) phù hợp xu hướng phát triển khách quan của thế giới trong bối cảnh toàn cầu hóa; (2) tận dụng tính ưu việt của kinh tế thị trường để thúc đẩy lực lượng sản xuất phát triển nhanh; (3) đúng nguyện vọng của nhân dân — vừa tăng trưởng nhanh, vừa không đánh đổi định hướng XHCN.",
+      },
+      {
+        heading: "Ví dụ: Từ bao cấp đến Đổi mới",
+        text: "Trước 1986, Việt Nam vận hành theo cơ chế kế hoạch hóa tập trung, quan liêu, bao cấp — Nhà nước định giá, phân phối bằng tem phiếu, kinh tế trì trệ, thiếu hàng hóa triền miên. Đại hội VI (1986) khởi xướng Đổi mới, thừa nhận kinh tế nhiều thành phần và cơ chế thị trường. Đến Đại hội IX (2001), khái niệm 'kinh tế thị trường định hướng XHCN' mới chính thức được nêu ra. Đây là mốc để nhớ nếu đề thi hỏi về tính tất yếu lịch sử.",
+      },
+      {
+        heading: "Đặc trưng về quản lý kinh tế",
+        text: "Nhà nước quản lý nền kinh tế bằng pháp luật, chiến lược, quy hoạch, kế hoạch và các công cụ, chính sách kinh tế — dưới sự lãnh đạo của Đảng — nhưng vẫn tôn trọng các quy luật khách quan của thị trường, khác với quản lý bằng mệnh lệnh hành chính thuần túy của cơ chế bao cấp trước đây.",
+      },
+      {
+        heading: "Ví dụ: Nhà nước quản lý xe công nghệ",
+        text: "Khi Grab/Be xuất hiện, Nhà nước không cấm (kìm hãm thị trường) cũng không thả nổi hoàn toàn (bỏ mặc taxi truyền thống và quyền lợi tài xế). Nghị định 10/2020/NĐ-CP đưa xe công nghệ vào khung pháp lý riêng, vừa cho cạnh tranh vừa ràng buộc nghĩa vụ thuế, bảo hiểm cho tài xế — đúng tinh thần 'quản lý bằng pháp luật, tôn trọng quy luật thị trường'.",
+      },
+      {
+        heading: "Đặc trưng về phân phối",
+        text: "Thực hiện nhiều hình thức phân phối, trong đó phân phối theo kết quả lao động và hiệu quả kinh tế là chủ yếu, kết hợp phân phối theo mức đóng góp vốn/nguồn lực và phân phối qua phúc lợi xã hội — vừa tạo động lực sản xuất, vừa hạn chế phân hóa giàu nghèo quá mức.",
+      },
+      {
+        heading: "Ví dụ: Lương tối thiểu vùng",
+        text: "Lương tối thiểu vùng ở Việt Nam không áp dụng một mức chung cả nước mà chia theo 4 vùng (I–IV) dựa trên mức sống và năng suất từng khu vực, đồng thời điều chỉnh định kỳ theo lộ trình — vừa phân phối theo lao động/hiệu quả kinh tế thực tế của từng vùng, vừa có sự điều tiết của Nhà nước để bảo vệ người lao động thu nhập thấp.",
+      },
     ],
   },
   {

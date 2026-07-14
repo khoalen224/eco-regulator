@@ -200,7 +200,13 @@ export default function EcoRegulatorGame() {
 
         <AnimatePresence mode="wait">
           {phase !== "gameover" && currentScenario && (
-            <ScenarioCard key={`scenario-${currentScenario.id}`} scenario={currentScenario} onChoice={handleChoice} disabled={phase === "feedback"} />
+            <ScenarioCard 
+              key={`scenario-${currentScenario.id}`} 
+              scenario={currentScenario} 
+              onChoice={handleChoice} 
+              disabled={phase === "feedback"}
+              selectedIndex={selectedChoiceIndex} 
+            />
           )}
         </AnimatePresence>
       </main>

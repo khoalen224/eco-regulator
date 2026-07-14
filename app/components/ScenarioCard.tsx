@@ -8,6 +8,7 @@ interface ScenarioCardProps {
   scenario: Scenario;
   onChoice: (index: number) => void;
   disabled: boolean;
+  selectedIndex?: number | null;
 }
 
 const choiceVariants: Variants = {
@@ -23,6 +24,7 @@ export default function ScenarioCard({
   scenario,
   onChoice,
   disabled,
+  selectedIndex,
 }: ScenarioCardProps) {
   return (
     <motion.div
@@ -124,9 +126,24 @@ export default function ScenarioCard({
                     className={`text-sm md:text-base leading-relaxed ${disabled ? "text-slate-500" : "text-slate-200 group-hover:text-slate-100 transition-colors duration-200"}`}
                   >
                     {/* Strip the leading "A. ", "B. ", "C. " from text */}
+                    {/* Strip the leading "A. ", "B. ", "C. " from text */}
                     {choice.text.replace(/^[A-C]\.\s/, "")}
                   </span>
                 </div>
+
+                {/* Approval Stamp Effect */}
+                {selectedIndex === i && (
+                  <motion.div
+                    initial={{ scale: 3, opacity: 0, rotate: -15 }}
+                    animate={{ scale: 1, opacity: 1, rotate: -5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
+                  >
+                    <div className="border-4 border-red-500/80 text-red-500/90 rounded-lg px-4 py-1 text-xl md:text-3xl font-black tracking-widest uppercase bg-slate-900/60 backdrop-blur-sm shadow-[0_0_30px_rgba(239,68,68,0.3)] whitespace-nowrap" style={{textShadow: "0 0 10px rgba(239,68,68,0.5)"}}>
+                      PHÊ DUYỆT
+                    </div>
+                  </motion.div>
+                )}
               </motion.button>
             ))}
           </div>
